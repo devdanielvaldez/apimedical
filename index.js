@@ -18,4 +18,4 @@ mongoose
 
 app.use('/api', require('./router/index.routes'));
 
-app.listen(3030, () => console.log("Servidor corriendo en http://localhost:3030"));
+app.listen(3031, () => console.log("Servidor corriendo en http://localhost:3030"));
