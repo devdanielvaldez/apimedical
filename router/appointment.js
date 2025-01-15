@@ -70,7 +70,7 @@ const addAppointment = async (req, res) => {
     await appointment.save();
 
     axios
-    .post('http://localhost:3008/v1/messages', {
+    .post('https://bot.drjenniferreyes.com/v1/messages', {
       number: `1${patientWhatsAppNumber}`,
       message: `LE NOTIFICAMOS QUE ACABA DE SER AGENDADA Y CONFIRMADA SU CONSULTA CON LA DOCTOR A JENNIFER, A CONTINUACIÓN PRESENTAMOS LOS DATOS: \n\n - FECHA: ${moment(dateAppointment).locale('es-DO').format('LL')}\n\n - HORA: ${dateTimeAppointment}`
     })
