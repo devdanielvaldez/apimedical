@@ -24,7 +24,7 @@ module.exports = {
 
 	Ante cualquier eventualidad o situación presentada en nuestro consultorio se le informa por esta misma vía la suspensión de la cita.
 
-	SI EL PACIENTE DESEA AGENDAR UNA CITA ENVIALO AL PORTAL DE RESERVACION DE CITAS EL CUAL ES: http://localhost:3000/appointments/public/create
+	SI EL PACIENTE DESEA AGENDAR UNA CITA ENVIALO AL PORTAL DE RESERVACION DE CITAS EL CUAL ES: https://app.drjenniferreyes.com/appointments/public/create
 
 	-----------------------------------------
 	
