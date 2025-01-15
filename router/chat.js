@@ -279,7 +279,21 @@ const userChat = async(req, res) => {
             context = appointmentContext;
         } else if (category.includes("servicios") || category.includes("costo")) {
             const messages = [
-                { role: "system", content: "La doctora Jennifer sus consultas se encuentran en 2,000 para asegurados y 2,500 pesos dominicanos para pacientes privados (no asegurados)" },
+                { role: "system", content: `"La doctora Jennifer sus consultas se encuentran en 2,000 para asegurados y 2,500 pesos dominicanos para pacientes privados (no asegurados)
+
+                LOS SERVICIOS QUE OFRECE LA DOCTORA SON:
+
+	LOS SERVICIOS QUE OFRECE SON:
+
+	- Servicios: 1 consulta de mamá y ginecólogica y obstetrica. 
+	- Procedimientos: papanicolau, biopsia de mama, cervix, endometrio, colposcopia biopsia. 
+	- Aplicación: hormonas, bioidenticas o para menopausia. 
+    - Procedimientos: reducción de labios menores con láser, aumento de labios mayores, clitoris y punto G. 
+    - Procedimientos de láser: relajación vaginal, incontinencia orinaria leve, atrofia y resequedad vaginal, láser post-parto, VPH ( virus, papiloma humano), depilación vulvar. 
+    - Procedimientos anticonceptivos: aplicación de DIU, implanont. 
+    - Procedimientos en cirugía: 
+    - Parto, legrado, cesárea, hiterectomia, etc. 
+                "` },
                 ...userHistory,
                 { role: "user", content: `Pregunta: ${question}` },
             ];
