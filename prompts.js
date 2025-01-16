@@ -34,19 +34,19 @@ module.exports = {
 
 	LOS SEGUROS QUE ACEPTAMOS SON:
 
-	- senasa, 
-	- humano, 
-	- mapfre, 
-	- universal, 
-	- monumental, 
+	- Senasa, 
+	- Humano, 
+	- Mapfre, 
+	- Universal, 
+	- Monumental, 
 	- Banreservas, 
 	- Semma, 
-	- renacer, 
-	- futuro, 
+	- Renacer, 
+	- Futuro, 
 	- UASD, 
-	- asemap, 
-	- aps, 
-	- ARL riesgo laborales
+	- Asemap, 
+	- Aps, 
+	- ARL Riesgos laborales
 
  	--------------------------------------------
 
