@@ -119,7 +119,45 @@ const getBlockedDates = async (req, res) => {
   }
 };
 
-// Rutas
+const deleteBlockDate = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Validar que el id esté presente
+    if (!id) {
+      return res.status(400).json({
+        ok: false,
+        msg: "El ID de la fecha bloqueada es obligatorio.",
+      });
+    }
+
+    // Buscar y eliminar la fecha bloqueada por ID
+    const deletedBlockDate = await BlockDates.findByIdAndDelete(id);
+
+    // Verificar si se encontró el registro
+    if (!deletedBlockDate) {
+      return res.status(404).json({
+        ok: false,
+        msg: "No se encontró la fecha bloqueada con el ID proporcionado.",
+      });
+    }
+
+    res.status(200).json({
+      ok: true,
+      msg: "Fecha bloqueada eliminada con éxito.",
+      deletedBlockDate,
+    });
+  } catch (err) {
+    console.error("Error al eliminar la fecha bloqueada:", err);
+    res.status(500).json({
+      ok: false,
+      msg: "Error interno del servidor.",
+    });
+  }
+};
+
+// Ruta para eliminar una fecha bloqueada
+routes.delete("/delete/:id", deleteBlockDate);
 routes.post("/create", addBlockDate);
 routes.get("/list", getBlockedDates);
 
