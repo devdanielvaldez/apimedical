@@ -1,16 +1,9 @@
 const mongoose = require("mongoose");
 
 const AppointmentsSchema = new mongoose.Schema({
-  patientName: { 
-    type: String, 
-    required: true 
-  },
-  patientPhoneNumber: { 
-    type: String, 
-    required: true 
-  },
-  patientWhatsAppNumber: { 
-    type: String, 
+  patientId: { 
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: "Patients", // Referencia al modelo de pacientes
     required: true 
   },
   patientMotive: { 
@@ -21,28 +14,12 @@ const AppointmentsSchema = new mongoose.Schema({
     type: Boolean, 
     required: false 
   },
-  insuranceMake: { 
-    type: String, 
-    required: false 
-  },
-  identification: { 
-    type: String, 
-    required: false 
-  },
-  insuranceImage: { 
-    type: String, 
-    required: false 
-  },
-  address: { 
-    type: String, 
-    required: false 
-  },
   dateAppointment: { 
-    type: Date, // Almacenamos solo la fecha
+    type: Date, 
     required: true 
   },
   dateTimeAppointment: { 
-    type: String, // Hora seleccionada en formato HH:mm
+    type: String, 
     required: true,
     validate: {
       validator: function (v) {
@@ -53,7 +30,7 @@ const AppointmentsSchema = new mongoose.Schema({
   },
   statusAppointment: { 
     type: String, 
-    enum: ['CO', 'PE', 'CA'], 
+    enum: ['CO', 'PE', 'CA', 'IN', 'COF'], 
     required: true, 
     default: 'CO' 
   },
@@ -61,6 +38,15 @@ const AppointmentsSchema = new mongoose.Schema({
     type: [Number], 
     required: true 
   },
+  services: [{ 
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: "Services",
+    required: true
+  }],
+  isWithInsurance: {
+    type: Boolean,
+    required: false
+  }
 });
 
 module.exports = mongoose.model("Appointments", AppointmentsSchema);

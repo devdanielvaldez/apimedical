@@ -2,14 +2,19 @@ const express = require("express");
 const mongoose = require("mongoose");
 const morgan = require('morgan');
 const cors = require('cors');
+const { config } = require('dotenv');
+const registerAppointmentsInQueueJob = require("./cronJobs/registerAppointments");
+const { initWebSocket, sendNotification } = require("./socket");
+config();
 
 const app = express();
 app.use(express.json());
 app.use(morgan('dev'));
 app.use(cors());
+registerAppointmentsInQueueJob();
 
 mongoose
-    .connect("mongodb+srv://bot-jennifer:1Yi28f07c4WR5E9T@bots-de0e4e49.mongo.ondigitalocean.com/bot-jennifer?tls=true&authSource=admin&replicaSet=bots", {
+    .connect("mongodb://localhost:27017/medical-system", {
         useNewUrlParser: true,
         useUnifiedTopology: true,
     })
@@ -18,6 +23,12 @@ mongoose
 
 app.use('/api', require('./router/index.routes'));
 
-app.listen(process.env.PORT, () => {
-    return console.log("Servidor corriendo en http://localhost:3030")
+const server = app.listen(process.env.PORT, () => {
+    console.log("Servidor corriendo en http://localhost:" + process.env.PORT);
 });
+
+initWebSocket(server);
+
+// setTimeout(() => {
+//     sendNotification("Se acaba de confirmar un turno.");
+// }, 4000);

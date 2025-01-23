@@ -2,12 +2,10 @@ const Services = require("../models/services");
 const routes = require("express").Router();
 const { generateEmbedding } = require("../utils/embeddings");
 
-// Controlador para agregar un rango de fecha bloqueada
 const addServices = async (req, res) => {
   try {
-    const { serviceName, servicePrice } = req.body;
+    const { serviceName, servicePrice, serviceWithInsurance } = req.body;
 
-    // Validar que la fecha esté presente
     if (!serviceName) {
       return res.status(400).json({
         ok: false,
@@ -15,7 +13,6 @@ const addServices = async (req, res) => {
       });
     }
 
-    // Validar formato de las horas y rango de tiempo
     if (!servicePrice) {
         return res.status(400).json({
             ok: false,
@@ -23,15 +20,13 @@ const addServices = async (req, res) => {
           });
     }
 
-
-    // Generar embedding
-    const text = `Servicio: ${serviceName}, Precio: ${servicePrice}`;
+    const text = `Servicio: ${serviceName}, Precio: ${servicePrice}, Precio con Seguro: ${serviceWithInsurance}`;
     const embedding = await generateEmbedding(text);
 
-    // Crear un nuevo registro de bloqueo
     const service = new Services({
       serviceName,
       servicePrice: +servicePrice,
+      serviceWithInsurance,
       embedding
     });
 
@@ -40,7 +35,7 @@ const addServices = async (req, res) => {
     res.status(201).json({
       ok: true,
       message: "Servicio registrado con éxito.",
-      blockDate,
+      service,
     });
   } catch (err) {
     console.error("Error al registrar la fecha bloqueada:", err);
@@ -51,16 +46,12 @@ const addServices = async (req, res) => {
   }
 };
 
-// Controlador para obtener todas las fechas bloqueadas
 const getAllServices = async (req, res) => {
   try {
-    // Buscar todas las fechas bloqueadas
     const services = await Services.find().select(
-      "_id serviceName servicePrice"
+      "_id serviceName servicePrice serviceWithInsurance"
     );
 
-
-    // Enviar respuesta con las fechas bloqueadas
     res.status(200).json({
       ok: true,
       services,
@@ -74,7 +65,6 @@ const getAllServices = async (req, res) => {
   }
 };
 
-// Rutas
 routes.post("/create", addServices);
 routes.get("/list", getAllServices);
 

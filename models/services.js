@@ -9,6 +9,10 @@ const ServicesSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
+  serviceWithInsurance: {
+    type: Number,
+    required: false
+  },
   embedding: {
     type: [Number],
     required: true,
