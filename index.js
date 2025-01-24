@@ -14,7 +14,7 @@ app.use(cors());
 registerAppointmentsInQueueJob();
 
 mongoose
-    .connect("mongodb://localhost:27017/medical-system", {
+    .connect("mongodb+srv://bot-jennifer:1Yi28f07c4WR5E9T@bots-de0e4e49.mongo.ondigitalocean.com/dr_jennifer?tls=true&authSource=admin&replicaSet=bots", {
         useNewUrlParser: true,
         useUnifiedTopology: true,
     })
