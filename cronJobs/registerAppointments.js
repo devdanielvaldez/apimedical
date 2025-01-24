@@ -3,7 +3,7 @@ const Appointments = require("../models/appointment");
 const TemporaryQueue = require("../models/turns");
 
 const registerAppointmentsInQueueJob = () => {
-    cron.schedule("*/8 * * * * *", async () => {
+    cron.schedule("*/3 * * * * *", async () => {
         try {
             console.log("⏰ Ejecutando job para registrar nuevas citas...");
 

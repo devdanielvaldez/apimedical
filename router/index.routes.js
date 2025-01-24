@@ -10,6 +10,7 @@ const Results = require('./results');
 const Turns = require('./turns');
 const ClinicalHistory = require('./clinicalHistory');
 const Accounting = require('./accounting');
+const Users = require('./users');
 
 routes.use('/appointments', Appointments);
 routes.use('/block-dates', BlockDates);
@@ -22,5 +23,6 @@ routes.use('/results', Results);
 routes.use('/turns', Turns);
 routes.use('/clinical/history', ClinicalHistory);
 routes.use('/accounting', Accounting);
+routes.use('/auth', Users);
 
 module.exports = routes;
