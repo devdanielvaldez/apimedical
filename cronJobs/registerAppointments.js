@@ -5,7 +5,7 @@ const TemporaryQueue = require("../models/turns");
 const registerAppointmentsInQueueJob = () => {
     cron.schedule("*/3 * * * * *", async () => {
         try {
-            console.log("⏰ Ejecutando job para registrar nuevas citas...");
+            // console.log("⏰ Ejecutando job para registrar nuevas citas...");
 
             // Calcular el rango del día en UTC
             const now = new Date(); // Fecha actual
