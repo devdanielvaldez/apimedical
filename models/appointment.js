@@ -46,6 +46,11 @@ const AppointmentsSchema = new mongoose.Schema({
   isWithInsurance: {
     type: Boolean,
     required: false
+  },
+  isActive: { 
+    type: Boolean, 
+    required: true, 
+    default: true 
   }
 });
 

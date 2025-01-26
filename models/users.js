@@ -14,6 +14,11 @@ const UsersSchema = new mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref: 'UsersGenerals',
         required: true
+    },
+    isActive: {
+        type: Boolean,
+        required: true,
+        default: true
     }
 });
 

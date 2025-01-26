@@ -11,6 +11,7 @@ const Turns = require('./turns');
 const ClinicalHistory = require('./clinicalHistory');
 const Accounting = require('./accounting');
 const Users = require('./users');
+const BranchOffice = require('./branchOffice');
 
 routes.use('/appointments', Appointments);
 routes.use('/block-dates', BlockDates);
@@ -23,6 +24,7 @@ routes.use('/results', Results);
 routes.use('/turns', Turns);
 routes.use('/clinical/history', ClinicalHistory);
 routes.use('/accounting', Accounting);
-routes.use('/auth', Users);
+routes.use('/auth', Users); 
+routes.use('/branch-office', BranchOffice);
 
 module.exports = routes;

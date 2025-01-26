@@ -1,0 +1,35 @@
+###
+POST http://localhost:3030/api/auth/register HTTP/1.1
+Content-Type: application/json
+
+{
+  "username": "satelite0ster@gmail.com",
+  "pwd": "123456",
+  "firstName": "frank",
+  "lastName": "vf",
+  "phone": "1234567890"
+}
+
+###
+POST http://localhost:3030/api/branch-office/create-or-update HTTP/1.1
+Content-Type: application/json
+
+{
+  "nameBranchOffice": "Centro de especialidades Medicas Monseñor Nouel",
+  
+  "address": "C/ Aniana Vargas, centro del pueblo, Bonao, No. 21, Provincia Monseõr Nouel",
+  "phone": "8095480002",
+  "phoneExtension": "4848",
+  "whatsApp": "8094445555",
+  "email": "doctorEspecialista_01@test.com"
+}
+### listar todas las sucursales
+GET http://localhost:3030/api/branch-office/list HTTP/1.1
+### buscar por id
+GET http://localhost:3030/api/branch-office/by-id/67967489097ffab0f5e9e98c HTTP/1.1
+### buscar por nombre
+GET http://localhost:3030/api/branch-office/by-name?nameBranchOffice=Siglo%2021 HTTP/1.1
+### desactivar una sucursal
+DELETE http://localhost:3030/api/branch-office/delete/67967489097ffab0f5e9e98c HTTP/1.1
+### activar una sucursal
+POST http://localhost:3030/api/branch-office/activate/67967489097ffab0f5e9e98c HTTP/1.1
