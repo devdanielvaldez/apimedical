@@ -31,7 +31,7 @@ const { PROCESS_ID, PROCESS_INSURANCE } = require('../prompts');
   fs.writeFileSync(tempFilePath, fileBuffer);
 
   const uploadResult = await fileManager.uploadFile(tempFilePath, {
-    mimeType,
+    mimeType: "image/jpeg",
     displayName: path.basename(tempFilePath),
   });
   
@@ -50,6 +50,7 @@ const { PROCESS_ID, PROCESS_INSURANCE } = require('../prompts');
   
     try {
       const mimeType = req.file.mimetype;
+      console.log(mimeType)
       const fileBuffer = req.file.buffer;
   
       const uploadedFile = await uploadToGemini(fileBuffer, mimeType);
@@ -87,6 +88,7 @@ const { PROCESS_ID, PROCESS_INSURANCE } = require('../prompts');
       });
   
       const result = await chatSession.sendMessage(req.body.type == 'C' ? PROCESS_ID : PROCESS_INSURANCE);
+      console.log(result.response.text());
       res.status(200).json({
         ok: true,
         data: result.response.text()

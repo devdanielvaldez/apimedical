@@ -83,7 +83,16 @@ const calculateTotal = async (servicesIds, insuranceId, isWithInsurance) => {
         userPayTotal += service.servicePrice; // El usuario paga el total
       });
     }
-
+    console.log({
+      isWithInsurance,
+      total,
+      ...(isWithInsurance && {
+        insuranceTotal,
+        userPayTotal,
+      }),
+      userPayTotal, // Siempre incluir el total que paga el usuario
+      detailedServices,
+    })
     return {
       isWithInsurance,
       total,
