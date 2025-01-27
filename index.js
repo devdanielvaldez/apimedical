@@ -11,10 +11,10 @@ const app = express();
 app.use(express.json());
 app.use(morgan('dev'));
 app.use(cors());
-registerAppointmentsInQueueJob();
+// registerAppointmentsInQueueJob();
 
 mongoose
-    .connect("mongodb://localhost:27017/medical-system", {
+    .connect(String(process.env.MONGODB), {
         useNewUrlParser: true,
         useUnifiedTopology: true,
     })
@@ -28,7 +28,3 @@ const server = app.listen(process.env.PORT, () => {
 });
 
 initWebSocket(server);
-
-// setTimeout(() => {
-//     sendNotification("Se acaba de confirmar un turno.");
-// }, 4000);
