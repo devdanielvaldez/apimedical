@@ -2,7 +2,6 @@ const Result = require("../models/results");
 const Patient = require("../models/patient");
 const { generateEmbedding } = require("../utils/embeddings");
 const { default: axios } = require("axios");
-const patient = require("../models/patient");
 const routes = require("express").Router();
 
 const createResult = async (req, res) => {
@@ -16,7 +15,8 @@ const createResult = async (req, res) => {
 
     const text = `Nombre de la Prueba: ${testName}, Fecha de la prueba: ${testDate}, URL del resultado de la prueba: ${result}, Descripcion del resultado: ${description}`;
     const embedding = await generateEmbedding(text);
-    const patient = await Patient.findById(patientId);
+    const patient = await Patient.findById(patientId).select('-embedding');
+    console.log(patient);
     const newResult = new Result({
       patient: patientId,
       testName,
@@ -31,7 +31,7 @@ const createResult = async (req, res) => {
 
         axios
           .post('https://bot.drjenniferreyes.com/v1/messages', {
-            number: `1${patient.patientWhatsAppNumber}`,
+            number: `1${patient.whatsAppNumber}`,
             message: `A CONTINUACIÓN LE PRESENTAMOS SUS RESULTADOS:\n\n- Nombre del Resultado: ${testName}\n- Descripción: ${description}\n- Enlace del Resultado: ${result}`
           })
           .then(() => {
