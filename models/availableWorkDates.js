@@ -42,6 +42,17 @@ const AvailableWorkDaysSchema = new mongoose.Schema({
     type: [Number],
     required: true,
   },
+  isActive: {
+    type: Boolean,
+    required: true,
+    default: true,
+    //Establecer si el registro esta activo o no
+  },
+  idBranchOffice:{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "BranchOffice",
+    required: true 
+  }
 });
 
 AvailableWorkDaysSchema.index({ dayOfWeek: 1 }, { unique: true }); // Evita duplicados de días

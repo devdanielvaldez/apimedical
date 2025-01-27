@@ -14,7 +14,7 @@ app.use(cors());
 registerAppointmentsInQueueJob();
 
 mongoose
-    .connect("mongodb+srv://bot-jennifer:1Yi28f07c4WR5E9T@bots-de0e4e49.mongo.ondigitalocean.com/dr_jennifer?tls=true&authSource=admin&replicaSet=bots", {
+    .connect(String(process.env.MONGODB), {
         useNewUrlParser: true,
         useUnifiedTopology: true,
     })
@@ -28,7 +28,3 @@ const server = app.listen(process.env.PORT, () => {
 });
 
 initWebSocket(server);
-
-// setTimeout(() => {
-//     sendNotification("Se acaba de confirmar un turno.");
-// }, 4000);

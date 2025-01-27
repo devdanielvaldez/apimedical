@@ -5,7 +5,7 @@ const { generateEmbedding } = require("../utils/embeddings");
 // Controlador para agregar días laborales disponibles
 const addAvailableWorkDay = async (req, res) => {
   try {
-    const { dayOfWeek, workHours } = req.body;
+    const { dayOfWeek, workHours, idBranchOffice } = req.body;
 
     // Validar que el día y horarios estén presentes
     if (!dayOfWeek || !workHours || !Array.isArray(workHours) || workHours.length === 0) {
@@ -15,6 +15,7 @@ const addAvailableWorkDay = async (req, res) => {
       });
     }
 
+    
     // Validar que los horarios tengan formato correcto y lógica coherente
     for (const { startTime, endTime } of workHours) {
       if (!/^([01]\d|2[0-3]):([0-5]\d)$/.test(startTime) || !/^([01]\d|2[0-3]):([0-5]\d)$/.test(endTime)) {
@@ -24,21 +25,28 @@ const addAvailableWorkDay = async (req, res) => {
         });
       }
       // if (startTime >= endTime) {
-      //   return res.status(400).json({
-      //     ok: false,
-      //     msg: `El horario de inicio (${startTime}) debe ser anterior al horario de fin (${endTime}).`,
-      //   });
-      // }
+        //   return res.status(400).json({
+          //     ok: false,
+          //     msg: `El horario de inicio (${startTime}) debe ser anterior al horario de fin (${endTime}).`,
+          //   });
+          // }
     }
-
+    // Validar que la sucursal asociada esté presente
+    if (!idBranchOffice) {
+      return res.status(400).json({
+        ok: false,
+        msg: "Debe proporcionar el id de la sucursal asociada.",
+      });
+    }
+    
     // Generar embedding
     const text = `${dayOfWeek} - ${workHours.map((h) => `${h.startTime}-${h.endTime}`).join(", ")}`;
     const embedding = await generateEmbedding(text);
-
+    
     // Crear o actualizar el día laboral disponible
     const availableWorkDay = await AvailableWorkDays.findOneAndUpdate(
       { dayOfWeek },
-      { dayOfWeek, workHours, embedding },
+      { dayOfWeek, workHours, embedding, idBranchOffice },
       { new: true, upsert: true } // Crea un nuevo documento si no existe
     );
 
@@ -87,8 +95,5 @@ const getAvailableWorkDays = async (req, res) => {
 
 // Ruta para obtener los días laborales disponibles
 routes.get("/list", getAvailableWorkDays);
-
-module.exports = routes;
-
 
 module.exports = routes;
