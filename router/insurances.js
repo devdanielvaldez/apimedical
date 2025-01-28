@@ -56,7 +56,7 @@ const getInsurance = async (req, res) => {
       .select("-embedding")
       .populate("services.service", "_id serviceName servicePrice serviceWithInsurance");
 
-    res.status(200).json({
+    res.status(201).json({
       ok: true,
       data: data,
     });
