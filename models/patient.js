@@ -30,7 +30,8 @@ const PatientSchema = new mongoose.Schema({
     required: false
   },
   insuranceMake: { 
-    type: String, 
+    type: mongoose.Types.ObjectId,
+    ref: 'Insurance', 
     required: false 
   },
   insuranceImage: { 
