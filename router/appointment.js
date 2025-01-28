@@ -32,6 +32,7 @@ const addAppointment = async (req, res) => {
     } = req.body;
 
     console.log(req.body);
+    
 
     // Validar campos obligatorios
     if (!patientPhoneNumber || !patientMotive || !dateAppointment || !dateTimeAppointment) {
@@ -49,7 +50,7 @@ const addAppointment = async (req, res) => {
         `${patientName} ${patientLastName || ""} - ${patientPhoneNumber} - ${patientWhatsAppNumber || ""} - ${address || ""} - ${identification || ""} - ${insuranceMake || ""} - ${patientIsInsurante || ""} - ${bornDate || ""} - ${sex || ""}`
       );
 
-      patient = new Patient({
+      const dataPatientRegister = {
         firstName: patientName,
         lastName: patientLastName,
         phoneNumber: patientPhoneNumber,
@@ -62,7 +63,14 @@ const addAppointment = async (req, res) => {
         embedding,
         bornDate,
         sex,
-      });
+      }
+
+      if(isWithInsurance == false) {
+        delete dataPatientRegister.insuranceMake;
+        delete dataPatientRegister.insuranceImage;
+      }
+
+      patient = new Patient(dataPatientRegister);
 
       await patient.save();
     } else {
