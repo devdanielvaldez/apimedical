@@ -65,9 +65,10 @@ const addAppointment = async (req, res) => {
         sex,
       }
 
-      if(isWithInsurance == false) {
+      if(patientIsInsurante == false) {
         delete dataPatientRegister.insuranceMake;
         delete dataPatientRegister.insuranceImage;
+        delete dataPatientRegister.identification;
       }
 
       patient = new Patient(dataPatientRegister);
