@@ -29,6 +29,7 @@ const createResult = async (req, res) => {
 
     await newResult.save();
 
+
         axios
           .post('https://bot.drjenniferreyes.com/v1/messages', {
             number: `1${patient.whatsAppNumber}`,
@@ -40,7 +41,6 @@ const createResult = async (req, res) => {
               data: newResult,
             });
           })
-
 
   } catch (error) {
     console.error("Error al crear el resultado:", error);
