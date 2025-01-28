@@ -13,11 +13,6 @@ const addServices = async (req, res) => {
       });
     }
 
-    if (!servicePrice) {
-        servicePrice = 0;
-        serviceWithInsurance = 0;
-    }
-
     const text = `Servicio: ${serviceName}, Precio: ${servicePrice}, Precio con Seguro: ${serviceWithInsurance}`;
     const embedding = await generateEmbedding(text);
 
