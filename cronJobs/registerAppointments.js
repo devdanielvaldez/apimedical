@@ -1,10 +1,17 @@
 const cron = require("node-cron");
 const Appointments = require("../models/appointment");
 const TemporaryQueue = require("../models/turns");
+const Padron = require("../entity/Padron");
+const Nacionalidad = require("../entity/Nacionality");
+const coneccion = require("../connection-typeorm");
 
 const registerAppointmentsInQueueJob = () => {
-    // cron.schedule("*/3 * * * * *", async () => {
+    // cron.schedule("*/6 * * * * *", async () => {
     //     try {
+    //         const repositoryPadron = coneccion.getRepository(Padron);
+    //         const data = await repositoryPadron.find({ take: 10, relations:{nacionalidad: true, municipio: {provincia: true}} });
+    //         console.log("⏰ datos de padron", data);
+
     //         console.log("⏰ Ejecutando job para registrar nuevas citas...");
 
     //         // Calcular el rango del día en UTC
@@ -50,7 +57,7 @@ const registerAppointmentsInQueueJob = () => {
     //             console.log("📋 No hay nuevas citas para registrar.\n\n");
     //         }
     //     } catch (error) {
-    //         console.error("❌ Error ejecutando el job:", error.message);
+    //         console.error("❌ Error ejecutando el job:", error.message, error);
     //     }
     // });
 };

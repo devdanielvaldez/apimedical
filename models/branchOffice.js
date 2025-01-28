@@ -33,7 +33,12 @@ const BranchOfficeSchema = new mongoose.Schema({
     required: true,
     default: true
     //Establecer si el registro esta activo o no
-  }
+  },
+  availableWorkDaysId:{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "AvailableWorkDays",
+      required: true 
+    }
 });
 
 module.exports = mongoose.model('BranchOffice', BranchOfficeSchema);

@@ -5,6 +5,10 @@ const cors = require('cors');
 const { config } = require('dotenv');
 const registerAppointmentsInQueueJob = require("./cronJobs/registerAppointments");
 const { initWebSocket, sendNotification } = require("./socket");
+const connection = require("./connection-typeorm");
+const padron = require("./entity/Padron");
+const { DataSource } = require("typeorm");
+
 config();
 
 const app = express();
@@ -13,17 +17,23 @@ app.use(morgan('dev'));
 app.use(cors());
 registerAppointmentsInQueueJob();
 
-mongoose
-    .connect("mongodb://localhost:27017/medical-system", {
+mongoose.connect("mongodb://localhost:27017/medical-system", {
         useNewUrlParser: true,
         useUnifiedTopology: true,
-    })
-    .then(() => console.log("Conectado a MongoDB"))
-    .catch((err) => console.error("Error conectando a MongoDB", err));
+})
+.then(() => console.log("Conectado a MongoDB"))
+.catch((err) => console.error("Error conectando a MongoDB", err));
+
+connection.initialize().then(() => {
+    console.log("Conexión DB datos auxiliares establecida correctamente!");
+}).catch((err) => {
+    console.error("Error al establecer la conexión a la base de datos de personas", err);
+});
+
 
 app.use('/api', require('./router/index.routes'));
 
-const server = app.listen(process.env.PORT, () => {
+const server = app.listen(process.env.PORT, async () => {
     console.log("Servidor corriendo en http://localhost:" + process.env.PORT);
 });
 
