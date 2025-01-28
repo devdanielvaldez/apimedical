@@ -38,7 +38,7 @@ POST http://localhost:3030/api/branch-office/activate/67967489097ffab0f5e9e98c H
 
 ### Datos auxiliares del padron
 ### datos de por cedula 
-GET http://localhost:3030/api/person-data-auxiliary/by-cedula/11800027382 HTTP/1.1
+GET http://localhost:3030/api/person-data-auxiliary/by-cedula/11800083112 HTTP/1.1
 ### datos de las nacionalidades
 GET http://localhost:3030/api/person-data-auxiliary/nacionality HTTP/1.1
 ### datos de las municipios

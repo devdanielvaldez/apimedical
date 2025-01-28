@@ -41,7 +41,7 @@ const getDataAuxiliaryPersonByCedula = async (req, res) => {
   try {
     const { cedula } = req.params;    
     const repositoryPadron = connection.getRepository(Padron);
-    const person = await repositoryPadron.findOne({ where: { cedula }, relations: ["nacionalidad", "municipio","municipio.provincia"] });
+    const person = await repositoryPadron.findOne({ where: { Cedula: cedula }, relations: ["nacionalidad", "municipio","municipio.provincia"] });
 
     if (!person) {
       return res.status(404).json({

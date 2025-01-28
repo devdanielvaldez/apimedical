@@ -6,143 +6,153 @@ module.exports = new EntitySchema({ 
   tableName: "PADRON",
   schema: "dbo",
   columns: {
-    cedula: {
-      type: "varchar",
-      length: 11,
-      primary: true,
-      name: "Cedula"
-    },
-    idProvincia: {
+    IdProvincia: {
       type: "int",
-      name: "IdProvincia"
+      nullable: true,
     },
-    idMunicipio: {
+    IdMunicipio: {
       type: "int",
-      name: "IdMunicipio"
+      nullable: true,
     },
-    codigoCircunscripcion: {
+    CodigoCircunscripcion: {
       type: "varchar",
       length: 2,
-      name: "CodigoCircunscripcion",
-      nullable: true
+      nullable: true,
     },
-    codigoRecinto: {
+    CodigoRecinto: {
       type: "varchar",
       length: 5,
-      name: "CodigoRecinto",
-      nullable: true
+      nullable: true,
     },
     colegio: {
       type: "varchar",
       length: 6,
-      name: "colegio",
-      nullable: true
+      nullable: true,
+    },
+    Cedula: {
+      type: "varchar",
+      length: 11,
+      nullable: false,
+      primary: true, // La cédula es clave primaria
     },
     nombres: {
       type: "varchar",
       length: 50,
-      name: "nombres",
-      nullable: true
+      nullable: true,
     },
     apellido1: {
       type: "varchar",
-      length: 50,
-      name: "apellido1",
-      nullable: true
+      length: 30,
+      nullable: true,
     },
     apellido2: {
       type: "varchar",
+      length: 30,
+      nullable: true,
+    },
+    NombresPlastico: {
+      type: "varchar",
       length: 50,
-      name: "apellido2",
-      nullable: true
+      nullable: true,
     },
-    nombresPlastico: {
+    ApellidosPlastico: {
       type: "varchar",
-      length: 100,
-      name: "NombresPlastico",
-      nullable: true
+      length: 60,
+      nullable: true,
     },
-    apellidosPlastico: {
-      type: "varchar",
-      length: 100,
-      name: "ApellidosPlastico",
-      nullable: true
-    },
-    fechaNacimiento: {
+    FechaNacimiento: {
       type: "datetime",
-      name: "FechaNacimiento",
-      nullable: true
+      nullable: true,
     },
-    idNacionalidad: {
+    IdNacionalidad: {
       type: "int",
-      name: "IdNacionalidad",
-      nullable: true
+      nullable: true,
     },
-    idSexo: {
+    IdSexo: {
+      type: "char",
+      length: 1,
+      nullable: true,
+    },
+    IdEstadoCivil: {
+      type: "char",
+      length: 1,
+      nullable: true,
+    },
+    IdCategoria: {
       type: "int",
-      name: "IdSexo",
-      nullable: true
+      nullable: true,
     },
-    idEstadoCivil: {
+    IdCausaCancelacion: {
       type: "int",
-      name: "IdEstadoCivil",
-      nullable: true
+      nullable: true,
     },
-    idCategoria: {
+    IdColegio: {
       type: "int",
-      name: "IdCategoria",
-      nullable: true
+      nullable: true,
     },
-    idCausaCancelacion: {
+    IdColegioOrigen: {
       type: "int",
-      name: "IdCausaCancelacion",
-      nullable: true
+      nullable: true,
     },
-    idColegio: {
+    IdMunicipioOrigen: {
       type: "int",
-      name: "IdColegio",
-      nullable: true
+      nullable: true,
     },
-    idColegioOrigen: {
-      type: "int",
-      name: "IdColegioOrigen",
-      nullable: true
-    },
-    idMunicipioOrigen: {
-      type: "int",
-      name: "IdMunicipioOrigen",
-      nullable: true
-    },
-    colegioOrigen: {
+    ColegioOrigen: {
       type: "varchar",
       length: 6,
-      name: "ColegioOrigen",
-      nullable: true
+      nullable: true,
     },
-    posPagina: {
+    PosPagina: {
       type: "int",
-      name: "PosPagina",
-      nullable: true
+      nullable: false,
     },
-    lugarVotacion: {
+    LugarVotacion: {
+      type: "char",
+      length: 1,
+      nullable: true,
+    },
+    IdProvinciaExterior: {
+      type: "int",
+      nullable: true,
+    },
+    IdMunicipioExterior: {
+      type: "int",
+      nullable: true,
+    },
+    CodigoRecintoExterior: {
       type: "varchar",
-      length: 100,
-      name: "LugarVotacion",
-      nullable: true
-    }
-  },
-  relations:{
-    nacionalidad: {
-      target: "Nacionalidad",
-      type: "many-to-one",
-      joinColumn: { name: "IdNacionalidad" },
-      inverseSide: "id"
+      length: 5,
+      nullable: true,
     },
-    municipio:{
-      target: "Municipio",
+    ColegioExterior: {
+      type: "varchar",
+      length: 6,
+      nullable: true,
+    },
+    PosPaginaExterior: {
+      type: "int",
+      nullable: true,
+    },
+  },
+  relations: {
+    provincia: {
       type: "many-to-one",
+      target: "Provincia",
+      joinColumn: { name: "IdProvincia" },
+      nullable: true,
+    },
+    municipio: {
+      type: "many-to-one",
+      target: "Municipio",
       joinColumn: { name: "IdMunicipio" },
-      inverseSide: "id"
+      nullable: true,
+    },
+    nacionalidad: {
+      type: "many-to-one",
+      target: "Nacionalidad",
+      joinColumn: { name: "IdNacionalidad" },
+      nullable: true,
     }
-  } 
+  }
 });
