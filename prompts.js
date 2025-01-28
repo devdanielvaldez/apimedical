@@ -51,5 +51,27 @@ module.exports = {
  	--------------------------------------------
 
 	SI EL PACIENTE INDICA QUE DEBE ENTREGARLE RESULTADOS A LA DOCTORA DEBES DECIRLE QUE AGENDE UNA CITA ENTRANDO POR EL ENLACE PARA LAS CITAS Y QUE EN EL MOTIVO COLOQUE "ENTREGA DE RESULTADOS". SI EL USUARIO INDICA QUE DESEA RECIBIR LOS RESULTADOS DE PARTE DE LA DOCTORA DEBES INDICARLE QUE AGENDE UNA CITA ACCEDIENDO AL ENLACE PARA PODER RECIBIR SUS RESULTADOS.
-    "`
+    "`,
+	PROCESS_ID: `"
+	Dame los datos de esta cedula dominicana, quiero los nombres, apellidos, fecha de nacimineto, sexo (Este campo en la cedula se llama Sexo y viene con un caracter: M = Masculino, F = Femenino) y el numero de cedula\n\nRetornamelos en el siguiente formato\n\n- Nombres: {nombres}\n- Apellidos: {apellidos}\n- Fecha de Nacimiento: {fecha de nacimiento}\n- Cedula: {numero de la cedula}
+
+	-----------------------
+
+	LA FECHA DE NACIMIENTO RETORNALA EN FORMATO DD/MM/YYYY
+
+	-----------------------
+
+	LA IMAGEN AL RECIBIRAS AL REVES YA QUE EL USUARIO TOMARA LA FOTO CON LA CAMARA FRONTAL DEL DISPOSITIVO
+
+	-----------------------
+
+	SINO LOGRAS CAPTURAR LOS DATOS DE LA CEDULA RETORNA EL CODIGO: NO_READ
+	"`,
+	PROCESS_INSURANCE:`"
+	CAPTURA LOS DATOS DE LOS CARNET DE SEGUROS MEDICOS QUE VERAS EN LAS IMAGENES QUE CARGARE, EL DATO QUE REQUIERO ES EL NUMERO DE AFILIADO, RETORNAMELO EN ESTE FORMATO: NUMERO DE AFILIADO: {numero_de_afiliado}
+	
+	------------------------
+
+	SINO LOGRAS CAPTURAR EL NUMERO DE AFILIADO RETORNA EL CODIGO: NO_READ
+	"`
 }

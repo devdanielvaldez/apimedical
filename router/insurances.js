@@ -58,6 +58,7 @@ const registerInsurance = async (req, res) => {
 const getInsurance = async (req, res) => {
     try {
         const data = await Insurance.find()
+        .select('-embedding')
         .populate('services.service', '_id serviceName servicePrice serviceWithInsurance');
   
       res.status(201).json({

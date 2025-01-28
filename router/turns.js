@@ -8,11 +8,12 @@ const getAllTurns = async (req, res) => {
         const turns = await TemporaryQueue.find()
             .populate({
                 path: "appointmentId",
+                select: "-embedding",
                 populate: { path: "patientId", select: "firstName lastName" },
             })
             .sort({ arrivalTime: 1 });
 
-        res.status(200).json({
+        return res.status(200).json({
             success: true,
             data: turns,
         });
@@ -53,7 +54,7 @@ const confirmTurn = async (req, res) => {
 
     try {
         const turn = await TemporaryQueue.findById(turnId).populate("appointmentId");
-        console.log(turn);
+        // return console.log('entro -->', turn);
 
         if (!turn) {
             return res.status(404).json({

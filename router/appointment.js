@@ -31,6 +31,8 @@ const addAppointment = async (req, res) => {
       sex,
     } = req.body;
 
+    console.log(req.body);
+
     // Validar campos obligatorios
     if (!patientPhoneNumber || !patientMotive || !dateAppointment || !dateTimeAppointment) {
       return res.status(400).json({
@@ -122,12 +124,31 @@ const addAppointment = async (req, res) => {
     });
 
     await appointment.save();
-    sendNotification("Le notificamos que ha sido agendada una nueva cita");
-    res.status(201).json({
-      ok: true,
-      message: "Cita agendada con éxito",
-      appointment,
-    });
+    axios
+      .post('https://bot.drjenniferreyes.com/v1/messages', {
+        number: `1${patientWhatsAppNumber}`,
+        message: `LE NOTIFICAMOS QUE ACABA DE SER AGENDADA Y CONFIRMADA SU CONSULTA CON LA DOCTOR A JENNIFER, A CONTINUACIÓN PRESENTAMOS LOS DATOS: \n\n - FECHA: ${moment(dateAppointment).locale('es-DO').format('LL')}\n\n - HORA: ${dateTimeAppointment}`
+      })
+      .then(() => {
+        axios
+          .post('https://bot.drjenniferreyes.com/v1/messages', {
+            number: `18492571779`,
+            message: `LE NOTIFICAMOS QUE SE ACABA DE AGENDAR UNA NUEVA CITA \n\n- Paciente: ${patientName}`
+          })
+          .then(() => {
+            axios
+              .post('https://bot.drjenniferreyes.com/v1/messages', {
+                number: `18296421564`,
+                message: `LE NOTIFICAMOS QUE SE ACABA DE AGENDAR UNA NUEVA CITA \n\n- Paciente: ${patientName}`
+              })
+              .then(() => {
+                res.status(201).json({ ok: true, message: "Cita agendada con éxito", appointment });
+
+              })
+
+          })
+
+      })
   } catch (err) {
     console.error("Error en addAppointment:", err);
     res.status(500).json({
@@ -411,12 +432,12 @@ const getAppointmentById = async (req, res) => {
   try {
     const { id } = req.params;
     const appointment = await Appointments.findById(id).select('-embedding').populate('patientId', '-embedding').populate('services', '-embedding');
-    
+
     return res.status(200).json({
       ok: true,
       data: appointment
     });
-  } catch(err) {
+  } catch (err) {
     console.error('Error registrando los detalles de la cita:', error);
     return res.status(500).json({ error: 'Hubo un error al capturar los detalles de la cita.' });
   }
@@ -435,7 +456,7 @@ const getPatientHistory = async (req, res) => {
     const clinicalHistory = await ClinicalHistory.find({
       patientId: patientId
     });
-    
+
     return res.status(200).json({
       ok: true,
       data: {
@@ -444,7 +465,7 @@ const getPatientHistory = async (req, res) => {
         clinicalHistory: clinicalHistory
       }
     });
-  } catch(err) {
+  } catch (err) {
     console.error('Error registrando los detalles de la cita:', error);
     return res.status(500).json({ error: 'Hubo un error al capturar los detalles de la cita.' });
   }
