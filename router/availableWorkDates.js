@@ -32,12 +32,12 @@ const addAvailableWorkDay = async (req, res) => {
           // }
     }
     // Validar que la sucursal asociada esté presente
-    if (!idBranchOffice) {
-      return res.status(400).json({
-        ok: false,
-        msg: "Debe proporcionar el id de la sucursal asociada.",
-      });
-    }
+    // if (!idBranchOffice) {
+    //   return res.status(400).json({
+    //     ok: false,
+    //     msg: "Debe proporcionar el id de la sucursal asociada.",
+    //   });
+    // }
     
     // Generar embedding
     const text = `${dayOfWeek} - ${workHours.map((h) => `${h.startTime}-${h.endTime}`).join(", ")}`;
