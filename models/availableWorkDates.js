@@ -51,7 +51,7 @@ const AvailableWorkDaysSchema = new mongoose.Schema({
   idBranchOffice:{
     type: mongoose.Schema.Types.ObjectId,
     ref: "BranchOffice",
-    required: true 
+    required: false 
   }
 });
 
