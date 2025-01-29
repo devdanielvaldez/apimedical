@@ -1,7 +1,5 @@
 const routes = require("express").Router();
-const { get } = require("mongoose");
 const BranchOffice = require("../models/branchOffice");
-const branchOffice = require("../models/branchOffice");
 
 const createOrUpdateBranchOffice = async (req, res) => {
   try {
@@ -243,8 +241,36 @@ const activateBranchOffice = async (req, res) => {
   }
 }
 
+const getBranchOfficeAndAviableWorkDays = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const branchOfficeFound = await BranchOffice.findOne({ _id: id, isActive: true }).populate("availableWorkDaysId");
+
+    if (!branchOfficeFound) {
+      return res.status(404).json({
+        ok: false,
+        msg: "No se encontró datos",
+      });
+    }
+
+    res.status(200).json({
+      ok: true,
+      branchOfficeFound,
+    });
+
+  } catch (err) {
+    console.error("Error al obtener el consultorio/oficina y los días de trabajo disponibles:", err);
+    res.status(500).json({
+      ok: false,
+      msg: "Error interno del servidor.",
+    });
+  }
+}
+
 routes.post("/create-or-update", createOrUpdateBranchOffice);
 routes.get("/list", getBranchOffices);
+routes.get("/availableWorkDays/:id", getBranchOfficeAndAviableWorkDays);
 routes.get("/by-id/:id", getBranchOfficeById);
 routes.get("/by-name", getBranchOfficesByName);
 routes.patch("/update/:id", updateBranchOffice);

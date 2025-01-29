@@ -48,7 +48,7 @@ const AvailableWorkDaysSchema = new mongoose.Schema({
     default: true,
     //Establecer si el registro esta activo o no
   },
-  idBranchOffice:{
+  branchOfficeId:{
     type: mongoose.Schema.Types.ObjectId,
     ref: "BranchOffice",
     required: true 
