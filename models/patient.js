@@ -11,7 +11,7 @@ const PatientSchema = new mongoose.Schema({
   },
   phoneNumber: { 
     type: String, 
-    required: true 
+    required: false 
   },
   whatsAppNumber: { 
     type: String, 
