@@ -8,7 +8,7 @@ const agent = new https.Agent({
   rejectUnauthorized: false
 });
 
-const dataStartPrimeraARS = async (req, res) => {
+const sesionNumber = async (req, res) => {
   try {
     const url = `${process.env.PRIMERA_ARS_BASE_URL}/sesion/inicio`;
     const { code_doctor } = req.body;
@@ -350,7 +350,7 @@ const login = async (req, res) => {
   }
 };
 
-router.post('/get-sesion', dataStartPrimeraARS);
+router.post('/get-sesion', sesionNumber);
 router.get('/insured', queryInsured);
 router.post('/validate-procedure', validateProcedure);
 router.post('/procedure', procedure);

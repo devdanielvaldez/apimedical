@@ -6,6 +6,10 @@ const InsuranceSchema = new mongoose.Schema({
       required: true,
       unique: true, // Para evitar duplicados de nombres de seguros
     },
+    isActive: {
+      type: Boolean,
+      default: true
+    },
     contactPhone: {
       type: String,
       required: true,
