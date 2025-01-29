@@ -17,8 +17,8 @@ const ResultRequestSchema = new Schema({
   },
   status: {
     type: String,
-    enum: ["Solicitado", "Cargado"],
-    default: "Solicitado",
+    enum: ["S", "C"], // S = Solicitado, C = Cargado
+    default: "S",
     required: true,
   },
   requestDate: {
@@ -36,7 +36,7 @@ const ResultRequestSchema = new Schema({
 });
 
 ResultRequestSchema.pre("save", function (next) {
-  if (this.isModified("status") && this.status === "Cargado") {
+  if (this.isModified("status") && this.status === "C") {
     this.uploadDate = new Date();
   }
   next();

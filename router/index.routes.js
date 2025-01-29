@@ -13,6 +13,10 @@ const Accounting = require('./accounting');
 const Users = require('./users');
 const BranchOffice = require('./branchOffice');
 const ProcessDocuments = require('./processDocuments');
+const RequestResults = require('./resultRequest');
+const PersonDataAuxiliary = require('./person-data-auxiliary');
+const Metrics = require('./metrics');
+const dataStartPrimeraARS = require('./resources-ars-primera');
 
 routes.use('/appointments', Appointments);
 routes.use('/block-dates', BlockDates);
@@ -27,6 +31,10 @@ routes.use('/clinical/history', ClinicalHistory);
 routes.use('/accounting', Accounting);
 routes.use('/auth', Users); 
 routes.use('/branch-office', BranchOffice);
-routes.use('/process-documents', ProcessDocuments)
+routes.use('/process-documents', ProcessDocuments);
+routes.use('/request/results', RequestResults);
+routes.use('/person-data-auxiliary', PersonDataAuxiliary);
+routes.use('/metrics', Metrics);
+routes.use('/primera-ars', dataStartPrimeraARS);
 
 module.exports = routes;

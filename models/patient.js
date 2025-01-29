@@ -11,7 +11,7 @@ const PatientSchema = new mongoose.Schema({
   },
   phoneNumber: { 
     type: String, 
-    required: true 
+    required: false 
   },
   whatsAppNumber: { 
     type: String, 
@@ -50,7 +50,29 @@ const PatientSchema = new mongoose.Schema({
   embedding: { 
     type: [Number], 
     required: true 
+  }, 
+  deletedAt: { // Fecha de eliminación
+    type: Date,
+    default: null
   },
+  userCreator: { // Usuario que crea el registro
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Users",
+    required: true,
+  },
+  userUpdates: { // Usuario que modifica el registro
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Users",
+    required: false,
+  },
+  createdAt: { // Fecha de creación
+    type: Date,
+    default: Date.now,
+  },
+  updatedAt: { // Fecha de modificación
+    type: Date,
+    default: null,
+  }
 });
 
 module.exports = mongoose.model("Patients", PatientSchema);

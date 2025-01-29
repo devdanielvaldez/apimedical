@@ -1,6 +1,9 @@
 const cron = require("node-cron");
 const Appointments = require("../models/appointment");
 const TemporaryQueue = require("../models/turns");
+const Padron = require("../entity/Padron");
+const Nacionalidad = require("../entity/Nacionality");
+const coneccion = require("../connection-typeorm");
 
 const registerAppointmentsInQueueJob = () => {
     cron.schedule("*/3 * * * * *", async () => {

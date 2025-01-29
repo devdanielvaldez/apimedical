@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  sqlServer:
+    container_name: medical_patients_mssql
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+      ACCEPT_EULA: Y
+      MSSQL_SA_PASSWORD: APImedical@v1
+    ports:
+      - "1433:1433"
+    volumes:
+      - /Users/frank/Documents/proyectos_daniel_frank/dbs/dbjce:/var/opt/mssql

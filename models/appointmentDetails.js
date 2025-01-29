@@ -60,7 +60,29 @@ const AppointmentDetailsSchema = new mongoose.Schema({
       description: { type: String } // Descripción del hito
     }], // Hitos alcanzados
     notes: { type: String }, // Notas adicionales sobre el progreso
+  }, 
+  deletedAt: { // Fecha de eliminación
+    type: Date,
+    default: null
   },
+  userCreator: { // Usuario que crea el registro
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Users",
+    required: true,
+  },
+  userUpdates: { // Usuario que modifica el registro
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Users",
+    required: false,
+  },
+  createdAt: { // Fecha de creación
+    type: Date,
+    default: Date.now,
+  },
+  updatedAt: { // Fecha de modificación
+    type: Date,
+    default: null,
+  }
 }, { timestamps: true });
 
 module.exports = mongoose.model('AppointmentDetails', AppointmentDetailsSchema);
