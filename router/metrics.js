@@ -14,7 +14,7 @@ const getMetrics = async (req, res) => {
         } else {
           serviceCounts[serviceId] = {
             count: 1,
-            name: service.name
+            name: service.serviceName
           };
         }
       });
