@@ -32,6 +32,7 @@ const addAppointment = async (req, res) => {
     } = req.body;
 
     console.log(req.body);
+    
 
     // Validar campos obligatorios
     if (!patientPhoneNumber || !patientMotive || !dateAppointment || !dateTimeAppointment) {
@@ -48,7 +49,7 @@ const addAppointment = async (req, res) => {
       const embedding = await generateEmbedding(
         `${patientName} ${patientLastName || ""} - ${patientPhoneNumber} - ${patientWhatsAppNumber || ""} - ${address || ""} - ${identification || ""} - ${insuranceMake || ""} - ${patientIsInsurante || ""} - ${bornDate || ""} - ${sex || ""}`
       );
-      const datapatientRegister = {
+      const dataPatientRegister = {
         firstName: patientName,
         lastName: patientLastName,
         phoneNumber: patientPhoneNumber,
@@ -63,13 +64,14 @@ const addAppointment = async (req, res) => {
         sex,
       };
 
+
       if(patientIsInsurante == false) {
-        delete datapatientRegister.insuranceMake;
-        delete datapatientRegister.insuranceImage;
-        delete datapatientRegister.identification;
+        delete dataPatientRegister.insuranceMake;
+        delete dataPatientRegister.insuranceImage;
+        delete dataPatientRegister.identification;
       }
 
-      patient = new Patient(datapatientRegister);
+      patient = new Patient(dataPatientRegister);
 
       await patient.save();
     } else {
@@ -131,33 +133,32 @@ const addAppointment = async (req, res) => {
     });
 
     await appointment.save();
-    // axios
-    //   .post('https://bot.drjenniferreyes.com/v1/messages', {
-    //     number: `1${patientWhatsAppNumber}`,
-    //     message: `LE NOTIFICAMOS QUE ACABA DE SER AGENDADA Y CONFIRMADA SU CONSULTA CON LA DOCTOR A JENNIFER, A CONTINUACIÓN PRESENTAMOS LOS DATOS: \n\n - FECHA: ${moment(dateAppointment).locale('es-DO').format('LL')}\n\n - HORA: ${dateTimeAppointment}`
-    //   })
-    //   .then(() => {
-    //     axios
-    //       .post('https://bot.drjenniferreyes.com/v1/messages', {
-    //         number: `18492571779`,
-    //         message: `LE NOTIFICAMOS QUE SE ACABA DE AGENDAR UNA NUEVA CITA \n\n- Paciente: ${patientName}`
-    //       })
-    //       .then(() => {
-    //         axios
-    //           .post('https://bot.drjenniferreyes.com/v1/messages', {
-    //             number: `18296421564`,
-    //             message: `LE NOTIFICAMOS QUE SE ACABA DE AGENDAR UNA NUEVA CITA \n\n- Paciente: ${patientName}`
-    //           })
-    //           .then(() => {
-    //             res.status(201).json({ ok: true, message: "Cita agendada con éxito", appointment });
+    
+    axios
+      .post('https://bot.drjenniferreyes.com/v1/messages', {
+        number: `1${patientWhatsAppNumber}`,
+        message: `LE NOTIFICAMOS QUE ACABA DE SER AGENDADA Y CONFIRMADA SU CONSULTA CON LA DOCTOR A JENNIFER, A CONTINUACIÓN PRESENTAMOS LOS DATOS: \n\n - FECHA: ${moment(dateAppointment).locale('es-DO').format('LL')}\n\n - HORA: ${dateTimeAppointment}`
+      })
+      .then(() => {
+        axios
+          .post('https://bot.drjenniferreyes.com/v1/messages', {
+            number: `18492571779`,
+            message: `LE NOTIFICAMOS QUE SE ACABA DE AGENDAR UNA NUEVA CITA \n\n- Paciente: ${patientName}`
+          })
+          .then(() => {
+            axios
+              .post('https://bot.drjenniferreyes.com/v1/messages', {
+                number: `18296421564`,
+                message: `LE NOTIFICAMOS QUE SE ACABA DE AGENDAR UNA NUEVA CITA \n\n- Paciente: ${patientName}`
+              })
+              .then(() => {
+                res.status(201).json({ ok: true, message: "Cita agendada con éxito", appointment });
 
-    //           })
+              })
 
-    //       })
+          })
 
-    //   })
-
-    res.status(201).json({ ok: true, message: "Cita agendada con éxito", appointment });
+      })
   } catch (err) {
     console.error("Error en addAppointment:", err);
     res.status(500).json({

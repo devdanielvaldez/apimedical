@@ -13,13 +13,6 @@ const addServices = async (req, res) => {
       });
     }
 
-    if (!servicePrice) {
-        return res.status(400).json({
-            ok: false,
-            msg: "El costo del servicio es requerido.",
-          });
-    }
-
     const text = `Servicio: ${serviceName}, Precio: ${servicePrice}, Precio con Seguro: ${serviceWithInsurance}`;
     const embedding = await generateEmbedding(text);
 

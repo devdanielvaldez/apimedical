@@ -56,6 +56,26 @@ const getInsurance = async (req, res) => {
       .select("-embedding")
       .populate("services.service", "_id serviceName servicePrice serviceWithInsurance");
 
+    res.status(201).json({
+      ok: true,
+      data: data,
+    });
+  } catch (err) {
+    console.error("Error al obtener los seguros médicos:", err);
+    res.status(500).json({
+      ok: false,
+      msg: "Error interno del servidor.",
+    });
+  }
+};
+
+const getInsuranceById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const data = await Insurance.findById(id)
+      .select("-embedding")
+      .populate("services.service", "_id serviceName servicePrice serviceWithInsurance");
+
     res.status(200).json({
       ok: true,
       data: data,
