@@ -45,3 +45,72 @@ GET http://localhost:3030/api/person-data-auxiliary/nacionality HTTP/1.1
 GET http://localhost:3030/api/person-data-auxiliary/municipaly HTTP/1.1
 ### datos de las provincias
 GET http://localhost:3030/api/person-data-auxiliary/province HTTP/1.1
+
+### Peticiones Primera ARS
+### Inicio primera ARS
+POST http://localhost:3030/api/primera-ars/get-sesion HTTP/1.1
+Content-Type: application/json
+
+{
+  "code_doctor": 15981
+}
+
+### Asegurado primera ARS
+GET http://localhost:3030/api/primera-ars/insured?numero_seguro=53935733&numero_sesion=316430287 HTTP/1.1
+
+### Validar procedimientos primera ARS
+POST http://localhost:3030/api/primera-ars/validate-procedure HTTP/1.1
+Content-Type: application/json
+
+{
+  "numeroSesion": "316430287",
+  "codigoProcedimiento": "1086", 
+  "tipoServicio": "104", 
+  "frecuencia": "1"
+}
+
+### Procedimientos primera ARS
+POST http://localhost:3030/api/primera-ars/procedure?numero_sesion=316430287&frecuencia=1 HTTP/1.1
+
+### Cierre primera ARS
+POST http://localhost:3030/api/primera-ars/closure?numero_sesion=316387803&pre_autorizar=true&es_arl=false HTTP/1.1
+### Cierre primera ARS
+POST http://localhost:3030/api/primera-ars/authorizations/316387803 HTTP/1.1
+Content-Type: application/json
+
+{
+  "anio": 2025,
+    "compania": 96,
+    "ramo": 94,
+    "secuencial": 630375,
+    "contacto": {
+        "tipoTelefono": "CEL",
+        "telefono": 8091112233,
+        "email": "",
+        "codigoZona": 1,
+        "codigoProvincia": 1
+    },
+    "diagnosticos": [
+        {
+            "codigoDiagnostico": "Z006",
+            "esDiagnosticoDefinitivo": false,
+            "esPrimerDiagnostico": true
+        }
+    ],
+    "medicoTratante": {
+        "codigoMedico": 0,
+        "nombreMedico": "DRA. JENNIFER REYES"
+    },
+    "comentarios": [],
+    "exentoDeFisico": false
+}
+
+### login primera ARS
+POST http://localhost:3030/api/primera-ars/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "15981",
+    "password": "15981",
+    "compania": "96"
+}

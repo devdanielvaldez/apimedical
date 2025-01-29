@@ -1,7 +1,6 @@
 
 const connection = require("../connection-typeorm");
 const { DataSource } = require("typeorm");
-// const { Padron } = require("../entity/Padron");
 const Padron = require("../entity/Padron");
 const Nacionality = require("../entity/Nacionality");
 const Municipaly  = require("../entity/Municipaly");

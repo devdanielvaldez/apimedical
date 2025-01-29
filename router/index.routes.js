@@ -14,6 +14,7 @@ const Users = require('./users');
 const BranchOffice = require('./branchOffice');
 const ProcessDocuments = require('./processDocuments');
 const PersonDataAuxiliary = require('./person-data-auxiliary');
+const dataStartPrimeraARS = require('./resources-ars-primera');
 
 routes.use('/appointments', Appointments);
 routes.use('/block-dates', BlockDates);
@@ -30,5 +31,6 @@ routes.use('/auth', Users);
 routes.use('/branch-office', BranchOffice);
 routes.use('/process-documents', ProcessDocuments)
 routes.use('/person-data-auxiliary', PersonDataAuxiliary);
+routes.use('/primera-ars', dataStartPrimeraARS);
 
 module.exports = routes;

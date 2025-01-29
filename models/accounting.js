@@ -62,7 +62,7 @@ const AccountingSchema = new mongoose.Schema({
     ref: "Users",
     required: true,
   },
-  userUpdated: { // Usuario que modifica el registro
+  userUpdates: { // Usuario que modifica el registro
     type: mongoose.Schema.Types.ObjectId,
     ref: "Users",
     required: false,
