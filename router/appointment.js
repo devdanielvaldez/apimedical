@@ -69,7 +69,6 @@ const addAppointment = async (req, res) => {
         delete datapatientRegister.identification;
       }
 
-      return console.log('entro --->',datapatientRegister)
       patient = new Patient(datapatientRegister);
 
       await patient.save();
