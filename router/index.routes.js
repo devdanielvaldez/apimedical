@@ -15,6 +15,7 @@ const BranchOffice = require('./branchOffice');
 const ProcessDocuments = require('./processDocuments');
 const RequestResults = require('./resultRequest');
 const PersonDataAuxiliary = require('./person-data-auxiliary');
+const Metrics = require('./metrics');
 
 routes.use('/appointments', Appointments);
 routes.use('/block-dates', BlockDates);
@@ -32,5 +33,6 @@ routes.use('/branch-office', BranchOffice);
 routes.use('/process-documents', ProcessDocuments);
 routes.use('/request/results', RequestResults);
 routes.use('/person-data-auxiliary', PersonDataAuxiliary);
+routes.use('/metrics', Metrics);
 
 module.exports = routes;

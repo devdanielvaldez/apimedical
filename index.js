@@ -25,11 +25,11 @@ mongoose
 .then(() => console.log("Conectado a MongoDB"))
 .catch((err) => console.error("Error conectando a MongoDB", err));
 
-connection.initialize().then(() => {
-    console.log("Conexión DB datos auxiliares establecida correctamente!");
-}).catch((err) => {
-    console.error("Error al establecer la conexión a la base de datos de personas", err);
-});
+// connection.initialize().then(() => {
+//     console.log("Conexión DB datos auxiliares establecida correctamente!");
+// }).catch((err) => {
+//     console.error("Error al establecer la conexión a la base de datos de personas", err);
+// });
 
 
 app.use('/api', require('./router/index.routes'));
