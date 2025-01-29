@@ -29,21 +29,18 @@ const createResult = async (req, res) => {
 
     await newResult.save();
 
-    // axios
-    //   .post('https://bot.drjenniferreyes.com/v1/messages', {
-    //     number: `1${patient.whatsAppNumber}`,
-    //     message: `A CONTINUACIÓN LE PRESENTAMOS SUS RESULTADOS:\n\n- Nombre del Resultado: ${testName}\n- Descripción: ${description}\n- Enlace del Resultado: ${result}`
-    //   })
-    //   .then(() => {
-    //     res.status(201).json({
-    //       message: "Resultado creado exitosamente",
-    //       data: newResult,
-    //     });
-    //   })
-    res.status(201).json({
-      message: "Resultado creado exitosamente",
-      data: newResult,
-    });
+
+        axios
+          .post('https://bot.drjenniferreyes.com/v1/messages', {
+            number: `1${patient.whatsAppNumber}`,
+            message: `A CONTINUACIÓN LE PRESENTAMOS SUS RESULTADOS:\n\n- Nombre del Resultado: ${testName}\n- Descripción: ${description}\n- Enlace del Resultado: ${result}`
+          })
+          .then(() => {
+            res.status(201).json({
+              message: "Resultado creado exitosamente",
+              data: newResult,
+            });
+          })
 
   } catch (error) {
     console.error("Error al crear el resultado:", error);
