@@ -48,8 +48,7 @@ const addAppointment = async (req, res) => {
       const embedding = await generateEmbedding(
         `${patientName} ${patientLastName || ""} - ${patientPhoneNumber} - ${patientWhatsAppNumber || ""} - ${address || ""} - ${identification || ""} - ${insuranceMake || ""} - ${patientIsInsurante || ""} - ${bornDate || ""} - ${sex || ""}`
       );
-
-      patient = new Patient({
+      const datapatientRegister = {
         firstName: patientName,
         lastName: patientLastName,
         phoneNumber: patientPhoneNumber,
@@ -62,7 +61,16 @@ const addAppointment = async (req, res) => {
         embedding,
         bornDate,
         sex,
-      });
+      };
+
+      if(patientIsInsurante == false) {
+        delete datapatientRegister.insuranceMake;
+        delete datapatientRegister.insuranceImage;
+        delete datapatientRegister.identification;
+      }
+
+      return console.log('entro --->',datapatientRegister)
+      patient = new Patient(datapatientRegister);
 
       await patient.save();
     } else {
