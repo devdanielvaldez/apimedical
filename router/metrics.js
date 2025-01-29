@@ -37,7 +37,7 @@ const getMetrics = async (req, res) => {
     let withInsurance = 0;
     let withoutInsurance = 0;
     appointments.forEach(appointment => {
-      if (appointment.isWithInsurance) {
+      if (appointment.patientIsInsurante) {
         withInsurance += 1;
       } else {
         withoutInsurance += 1;
