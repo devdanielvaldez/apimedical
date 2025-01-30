@@ -509,7 +509,7 @@ const checkAvailability = async (req, res) => {
       return res.status(200).json({ ok: false, message: "Agenda llena para hoy" });
     }
 
-    return res.status(200).json({ ok: true, message: "Citas disponibles", availableSlots: 10 - countAppointments });
+    return res.status(200).json({ ok: true, message: "Citas disponibles", availableSlots: 12 - countAppointments });
   } catch (error) {
     return res.status(500).json({ message: "Error al verificar disponibilidad", error: error.message });
   }
