@@ -32,7 +32,8 @@ module.exports = {
  	- GMA
 	- UASD, 
 	- Asemap, 
- 	- Renacer
+ 	- Renacer,
+  	- Semma
 
  	--------------------------------------------
 
