@@ -10,7 +10,7 @@ const { authMiddleware } = require('../middleware/authMiddleware');
 config();
 
 const registerUser = async (req, res) => {
-    const { username, pwd, firstName, lastName, phone } = req.body;
+    const { username, pwd, firstName, lastName, phone, branchOfficeId } = req.body;
 
     try {
         const existingUser = await User.findOne({ username });
@@ -19,10 +19,10 @@ const registerUser = async (req, res) => {
         }
 
         const hashedPwd = await bcrypt.hash(pwd, 10);
-        const userGeneral = new UserGeneral({ firstName, lastName, phone });
+        const userGeneral = new UserGeneral({ firstName, lastName, phone, branchOfficeId });
         await userGeneral.save();
 
-        const user = new User({ username, pwd: hashedPwd, userGeneral: userGeneral._id });
+        const user = new User({ username, pwd: hashedPwd, userGeneral: userGeneral._id, branchOfficeId });
         await user.save();
 
         res.status(201).json({ message: 'Usuario registrado exitosamente.' });
