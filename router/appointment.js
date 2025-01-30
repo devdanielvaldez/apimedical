@@ -490,4 +490,31 @@ const getPatientHistory = async (req, res) => {
 }
 routes.get('/details/:patientId', getPatientHistory);
 
+const checkAvailability = async (req, res) => {
+  try {
+    const today = new Date();
+    today.setUTCHours(0, 0, 0, 0);
+    
+    const tomorrow = new Date();
+    tomorrow.setUTCHours(23, 59, 59, 999);
+
+    const countAppointments = await Appointments.countDocuments({
+      dateAppointment: { 
+        $gte: today.toISOString(), 
+        $lte: tomorrow.toISOString() 
+      },
+    });
+
+    if (countAppointments >= 10) {
+      return res.status(200).json({ ok: false, message: "Agenda llena para hoy" });
+    }
+
+    return res.status(200).json({ ok: true, message: "Citas disponibles", availableSlots: 10 - countAppointments });
+  } catch (error) {
+    return res.status(500).json({ message: "Error al verificar disponibilidad", error: error.message });
+  }
+}
+
+routes.get('/check/availability', checkAvailability);
+
 module.exports = routes;

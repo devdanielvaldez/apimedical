@@ -60,7 +60,7 @@ const ClinicalHistorySchema = new mongoose.Schema({
       userCreator: { // Usuario que crea el registro
         type: mongoose.Schema.Types.ObjectId,
         ref: "Users",
-        required: true,
+        required: false,
       },
       userUpdates: { // Usuario que modifica el registro
         type: mongoose.Schema.Types.ObjectId,
