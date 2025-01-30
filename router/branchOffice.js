@@ -1,9 +1,10 @@
 const routes = require("express").Router();
+const { authMiddleware } = require("../middleware/authMiddleware");
 const BranchOffice = require("../models/branchOffice");
 
 const createOrUpdateBranchOffice = async (req, res) => {
   try {
-    const { nameBranchOffice, address, phone, phoneExtension, whatsApp, email } = req.body;
+    const { _id, nameBranchOffice, address, phone, phoneExtension, whatsApp, email } = req.body;
 
     if (!nameBranchOffice || !address || !phone || !email) {
       return res.status(400).json({
@@ -12,45 +13,48 @@ const createOrUpdateBranchOffice = async (req, res) => {
       });
     }
 
-    const banchOffice = await BranchOffice.findOneAndUpdate(
-      { nameBranchOffice },
-      { nameBranchOffice, address, phone, phoneExtension, whatsApp, email },
-      { new: true, upsert: true }
-    );
+    let branchOffice;
+    if (_id) {
+      branchOffice = await BranchOffice.findByIdAndUpdate(
+        _id,
+        { nameBranchOffice, address, phone, phoneExtension, whatsApp, email, userUpdates: req.user.id },
+        { new: true, runValidators: true }
+      );
 
-    // const newBranchOffice = new BranchOffice({
-    //   nameBranchOffice,
-    //   address,
-    //   phone,
-    //   phoneExtension,
-    //   whatsApp,
-    //   email,
-    // });
+      if (!branchOffice) {
+        return res.status(404).json({
+          ok: false,
+          msg: "No se encontró el consultorio/oficina para actualizar",
+        });
+      }
 
-    // await newBranchOffice.save();
-
-    if(banchOffice.nModified > 0){
       return res.status(200).json({
         ok: true,
         message: "Consultorio/Oficina modificado con éxito.",
-        banchOffice,
+        branchOffice,
+      });
+    } else {
+
+      branchOffice = new BranchOffice({ nameBranchOffice, address, phone, phoneExtension, whatsApp, email, userCreator: req.user.id });
+      await branchOffice.save();
+
+      return res.status(201).json({
+        ok: true,
+        message: "Consultorio/Oficina registrado con éxito.",
+        branchOffice,
       });
     }
-    
-    res.status(201).json({
-      ok: true,
-      message: "Consultorio/Oficina registrado con éxito.",
-      banchOffice,
-    });
-
   } catch (err) {
-    console.error("Error al registrar/actualizar el Consultorio/Oficina:", err);
-    res.status(500).json({
+    console.error("Error al registrar/actualizar el Consultorio/Oficina:", err.message);
+
+    return res.status(500).json({
       ok: false,
-      msg: "Error interno del servidor.",
+      msg: "Error interno del servidor. Por favor, intente de nuevo.",
+      error: err.message,
     });
   }
-}
+};
+
 
 const getBranchOffices = async (req, res) => {
   try {
@@ -268,7 +272,7 @@ const getBranchOfficeAndAviableWorkDays = async (req, res) => {
   }
 }
 
-routes.post("/create-or-update", createOrUpdateBranchOffice);
+routes.post("/create-or-update", authMiddleware, createOrUpdateBranchOffice);
 routes.get("/list", getBranchOffices);
 routes.get("/availableWorkDays/:id", getBranchOfficeAndAviableWorkDays);
 routes.get("/by-id/:id", getBranchOfficeById);
