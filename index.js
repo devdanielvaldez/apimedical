@@ -32,7 +32,7 @@ mongoose
 // });
 
 
-app.use('/api', require('./router/index.routes'));
+app.use('/gianna', require('./router/index.routes'));
 
 const server = app.listen(process.env.PORT, async () => {
     console.log("Servidor corriendo en http://localhost:" + process.env.PORT);
