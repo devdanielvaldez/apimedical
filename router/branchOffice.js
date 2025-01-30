@@ -12,45 +12,32 @@ const createOrUpdateBranchOffice = async (req, res) => {
       });
     }
 
-    const banchOffice = await BranchOffice.findOneAndUpdate(
+    const updatedBranchOffice = await BranchOffice.findOneAndUpdate(
       { nameBranchOffice },
       { nameBranchOffice, address, phone, phoneExtension, whatsApp, email },
-      { new: true, upsert: true }
+      { new: true, upsert: true, runValidators: true }
     );
 
-    // const newBranchOffice = new BranchOffice({
-    //   nameBranchOffice,
-    //   address,
-    //   phone,
-    //   phoneExtension,
-    //   whatsApp,
-    //   email,
-    // });
+    const isNew = updatedBranchOffice.createdAt && updatedBranchOffice.updatedAt === updatedBranchOffice.createdAt;
 
-    // await newBranchOffice.save();
-
-    if(banchOffice.nModified > 0){
-      return res.status(200).json({
-        ok: true,
-        message: "Consultorio/Oficina modificado con éxito.",
-        banchOffice,
-      });
-    }
-    
-    res.status(201).json({
+    return res.status(isNew ? 201 : 200).json({
       ok: true,
-      message: "Consultorio/Oficina registrado con éxito.",
-      banchOffice,
+      message: isNew
+        ? "Consultorio/Oficina registrado con éxito."
+        : "Consultorio/Oficina modificado con éxito.",
+      branchOffice: updatedBranchOffice,
     });
 
   } catch (err) {
-    console.error("Error al registrar/actualizar el Consultorio/Oficina:", err);
-    res.status(500).json({
+    console.error("Error al registrar/actualizar el Consultorio/Oficina:", err.message);
+
+    return res.status(500).json({
       ok: false,
-      msg: "Error interno del servidor.",
+      msg: "Error interno del servidor. Por favor, intente de nuevo.",
+      error: err.message,
     });
   }
-}
+};
 
 const getBranchOffices = async (req, res) => {
   try {
