@@ -505,7 +505,7 @@ const checkAvailability = async (req, res) => {
       },
     });
 
-    if (countAppointments >= 10) {
+    if (countAppointments >= 12) {
       return res.status(200).json({ ok: false, message: "Agenda llena para hoy" });
     }
 
