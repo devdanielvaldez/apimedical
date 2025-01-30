@@ -38,7 +38,7 @@ const ResultSchema = new mongoose.Schema(
     branchOfficeId: { // Sucursal a la que pertenece
       type: mongoose.Schema.Types.ObjectId,
       ref: "BranchOffices",
-      required: true,
+      required: false,
     },
     userCreator: { // Usuario que crea el registro
       type: mongoose.Schema.Types.ObjectId,
