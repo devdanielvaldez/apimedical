@@ -54,6 +54,10 @@ const BranchOfficeSchema = new mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: "AvailableWorkDays",
       required: false 
+    },
+    isActive: {
+      type: Boolean,
+      default: true
     }
 });
 
