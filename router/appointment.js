@@ -137,7 +137,7 @@ const addAppointment = async (req, res) => {
     axios
       .post('https://bot-ga.medicloudsuite.com/v1/messages', {
         number: `1${patientWhatsAppNumber}`,
-        message: `LE NOTIFICAMOS QUE ACABA DE SER AGENDADA Y CONFIRMADA SU CONSULTA CON LA DOCTOR ABRAHAM ARACENA, A CONTINUACIÓN PRESENTAMOS LOS DATOS: \n\n - FECHA: ${moment(dateAppointment).locale('es-DO').format('LL')}\n\n - HORA: ${dateTimeAppointment}`
+        message: `LE NOTIFICAMOS QUE ACABA DE SER AGENDADA Y CONFIRMADA SU CONSULTA CON EL DOCTOR ABRAHAM ARACENA, A CONTINUACIÓN PRESENTAMOS LOS DATOS: \n\n - FECHA: ${moment(dateAppointment).locale('es-DO').format('LL')}\n\n - HORA: ${dateTimeAppointment}`
       })
       .then(() => {
         axios
