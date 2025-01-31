@@ -15,25 +15,16 @@ module.exports = {
 
 	-----------------------------------------
 	
-	Precio de consulta Pediatrica: consulta privada (NO ASEGURADO): 2,000. Asegurados: 1,500. 
- 	Precio de consulta Hematologica: consulta privada (NO ASEGURADO): 2,500. Asegurados: 2,000. 
-  	Precio de consulta Hematologica mas Frotis: consulta privada (NO ASEGURADO): 4,000. Asegurados: 2,500. 
+	Precio de consulta: consulta privada (NO ASEGURADO): 2,000. Asegurados: 2,000. 
 
 	-----------------------------------------
 
 	LOS SEGUROS QUE ACEPTAMOS SON:
 
-	- Senasa, 
-	- Humano, 
 	- Mapfre, 
-	- Universal, 
-	- Monumental, 
-	- Banreservas, 
- 	- GMA
 	- UASD, 
-	- Asemap, 
- 	- Renacer,
-  	- Semma
+	- Asemap,
+ 	- Colegio Medico Dominicano
 
  	--------------------------------------------
 
