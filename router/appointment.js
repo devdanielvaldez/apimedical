@@ -135,20 +135,20 @@ const addAppointment = async (req, res) => {
     await appointment.save();
     
     axios
-      .post('https://bot.drjenniferreyes.com/v1/messages', {
+      .post('https://bot-ga.medicloudsuite.com/v1/messages', {
         number: `1${patientWhatsAppNumber}`,
-        message: `LE NOTIFICAMOS QUE ACABA DE SER AGENDADA Y CONFIRMADA SU CONSULTA CON LA DOCTOR A JENNIFER, A CONTINUACIÓN PRESENTAMOS LOS DATOS: \n\n - FECHA: ${moment(dateAppointment).locale('es-DO').format('LL')}\n\n - HORA: ${dateTimeAppointment}`
+        message: `LE NOTIFICAMOS QUE ACABA DE SER AGENDADA Y CONFIRMADA SU CONSULTA CON LA DOCTOR ABRAHAM ARACENA, A CONTINUACIÓN PRESENTAMOS LOS DATOS: \n\n - FECHA: ${moment(dateAppointment).locale('es-DO').format('LL')}\n\n - HORA: ${dateTimeAppointment}`
       })
       .then(() => {
         axios
-          .post('https://bot.drjenniferreyes.com/v1/messages', {
-            number: `18492571779`,
+          .post('https://bot-ga.medicloudsuite.com/v1/messages', {
+            number: `18498171964`,
             message: `LE NOTIFICAMOS QUE SE ACABA DE AGENDAR UNA NUEVA CITA \n\n- Paciente: ${patientName}`
           })
           .then(() => {
             axios
-              .post('https://bot.drjenniferreyes.com/v1/messages', {
-                number: `18296421564`,
+              .post('https://bot-ga.medicloudsuite.com/v1/messages', {
+                number: `18498171964`,
                 message: `LE NOTIFICAMOS QUE SE ACABA DE AGENDAR UNA NUEVA CITA \n\n- Paciente: ${patientName}`
               })
               .then(() => {
