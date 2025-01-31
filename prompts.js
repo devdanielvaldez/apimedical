@@ -11,7 +11,7 @@ module.exports = {
 
 	Ante cualquier eventualidad o situación presentada en nuestro consultorio se le informa por esta misma vía la suspensión de la cita.
 
-	SI EL PACIENTE DESEA AGENDAR UNA CITA ENVIALO AL PORTAL DE RESERVACION DE CITAS EL CUAL ES: https://dragianna.medica-suite.com/appointments/public/create
+	SI EL PACIENTE DESEA AGENDAR UNA CITA ENVIALO AL PORTAL DE RESERVACION DE CITAS EL CUAL ES: https://dra-gianna.medicloudsuite.com/appointments/public/create
 
 	-----------------------------------------
 	
