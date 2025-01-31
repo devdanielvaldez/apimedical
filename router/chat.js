@@ -308,12 +308,12 @@ const userChat = async(req, res) => {
             const availableWorkDays = await checkAvailableWorkDays();
 
             if (availableWorkDays.length > 0) {
-                reply = `Los horarios disponibles para la doctora Jennifer son los siguientes:\n\n` +
+                reply = `Los horarios disponibles para la doctora Gianna son los siguientes:\n\n` +
                         availableWorkDays.map(day => 
                             `${day.dayOfWeek}: ${day.availableHours.map(hour => `${hour.startTime} - ${hour.endTime}`).join(', ')}`
                         ).join('\n');
             } else {
-                reply = "No hay horarios disponibles para la doctora Jennifer en este momento.";
+                reply = "No hay horarios disponibles para la doctora Gianna en este momento.";
             }
 
             context = "Horarios disponibles";
