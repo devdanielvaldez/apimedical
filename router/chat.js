@@ -252,7 +252,7 @@ const checkAvailableWorkDays = async () => {
 const userChat = async(req, res) => {
     const { phoneNumber, question } = req.body;
 
-	if(phoneNumber == '18299438111') return;
+	if(phoneNumber == '18299438111' || phoneNumber == '18498818111' || phoneNumber == '18498171964') return;
 
     if (!phoneNumber || !question) {
         return res.status(400).json({ error: "Número de teléfono y pregunta requeridos" });
