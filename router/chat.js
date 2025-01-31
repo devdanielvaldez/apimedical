@@ -87,7 +87,7 @@ async function AppointmentInfo(question, phone) {
         const openaiResponse = await openai.chat.completions.create({
             model: "gpt-3.5-turbo",
             messages: [
-                { role: "system", content: "Eres un asistente que ofrece informacion sobre las consultas agendadas en el consultorio de la doctora Jennifer la cual es Ginecologa y Mastologa, debes buscar si el paciente tiene una cita agendada para poder retornarle toda la información sobre su cita. Retorna solo los datos de la cita si los encontraste. Si el paciente no tiene cita puedes indicarle que puede agendar mediante nuestro portal de agenda el cual es: https://app.drjenniferreyes.com/appointments/public/create o llamando a nuestro telefono el cual es: (809) 769 - 5217 las llamadas unicamente dentro de nuestro horario de Lunes a Viernes de 9:00 AM a 5:00 PM. No se pueden agendar citas por whatsapp, si el paciente no tiene cita envialo a la web." },
+                { role: "system", content: "Eres un asistente que ofrece informacion sobre las consultas agendadas en el consultorio del Doctor Abraham Aracena el cual es Internista Infectologo, debes buscar si el paciente tiene una cita agendada para poder retornarle toda la información sobre su cita. Retorna solo los datos de la cita si los encontraste. Si el paciente no tiene cita puedes indicarle que puede agendar mediante nuestro portal de agenda el cual es: https://dr-abraham.medicloudsuite.com/appointments/public/create o llamando a nuestro telefono el cual es: (849) 817 - 1964 las llamadas unicamente dentro de nuestro horario de Lunes a Viernes de 9:00 AM a 5:00 PM. No se pueden agendar citas por whatsapp, si el paciente no tiene cita envialo a la web." },
                 {
                     role: "user",
                     content: `Aquí tienes la informacion sobre las citas agendadas ${appointmentInfo}`,
@@ -186,7 +186,7 @@ async function AvailableWorkDaysInfo(question) {
         const openaiResponse = await openai.chat.completions.create({
             model: "gpt-3.5-turbo",
             messages: [
-                { role: "system", content: "Eres un asistente que ofrece información sobre los horarios disponibles de la doctora Jennifer, ginecóloga y mastóloga. Debes mostrar los días y horarios en los que tiene disponibilidad." },
+                { role: "system", content: "Eres un asistente que ofrece información sobre los horarios disponibles del Doctor Abraham Aracena, Internista Infectologo. Debes mostrar los días y horarios en los que tiene disponibilidad." },
                 {
                     role: "user",
                     content: `Aquí tienes la información sobre los horarios disponibles: ${availableInfo}`,
@@ -252,7 +252,7 @@ const checkAvailableWorkDays = async () => {
 const userChat = async(req, res) => {
     const { phoneNumber, question } = req.body;
 
-	if(phoneNumber == '18296421564' || phoneNumber == '17815101547') return;
+	if(phoneNumber == '18299438111') return;
 
     if (!phoneNumber || !question) {
         return res.status(400).json({ error: "Número de teléfono y pregunta requeridos" });
@@ -281,20 +281,8 @@ const userChat = async(req, res) => {
             context = appointmentContext;
         } else if (category.includes("servicios") || category.includes("costo")) {
             const messages = [
-                { role: "system", content: `"La doctora Jennifer sus consultas se encuentran en 2,000 para asegurados y 2,500 pesos dominicanos para pacientes privados (no asegurados)
+                { role: "system", content: `"El doctor Abraham sus consultas se encuentran en 2,000 para asegurados y 2,000 pesos dominicanos para pacientes privados (no asegurados)
 
-                LOS SERVICIOS QUE OFRECE LA DOCTORA SON:
-
-	LOS SERVICIOS QUE OFRECE SON:
-
-	- Servicios: 1 consulta de mamá y ginecólogica y obstetrica. 
-	- Procedimientos: papanicolau, biopsia de mama, cervix, endometrio, colposcopia biopsia. 
-	- Aplicación: hormonas, bioidenticas o para menopausia. 
-    - Procedimientos: reducción de labios menores con láser, aumento de labios mayores, clitoris y punto G. 
-    - Procedimientos de láser: relajación vaginal, incontinencia orinaria leve, atrofia y resequedad vaginal, láser post-parto, VPH ( virus, papiloma humano), depilación vulvar. 
-    - Procedimientos anticonceptivos: aplicación de DIU, implanont. 
-    - Procedimientos en cirugía: 
-    - Parto, legrado, cesárea, hiterectomia, etc. 
                 "` },
                 ...userHistory,
                 { role: "user", content: `Pregunta: ${question}` },
@@ -321,7 +309,7 @@ const userChat = async(req, res) => {
             const availableWorkDays = await checkAvailableWorkDays();
 
             if (availableWorkDays.length > 0) {
-                reply = `Los horarios disponibles para la doctora Jennifer son los siguientes:\n\n` +
+                reply = `Los horarios disponibles para la doctor Abraham Aracena son los siguientes:\n\n` +
                         availableWorkDays.map(day => 
                             `${day.dayOfWeek}: ${day.availableHours.map(hour => `${hour.startTime} - ${hour.endTime}`).join(', ')}`
                         ).join('\n');
