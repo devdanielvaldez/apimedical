@@ -314,7 +314,7 @@ const userChat = async(req, res) => {
                             `${day.dayOfWeek}: ${day.availableHours.map(hour => `${hour.startTime} - ${hour.endTime}`).join(', ')}`
                         ).join('\n');
             } else {
-                reply = "No hay horarios disponibles para la doctora Jennifer en este momento.";
+                reply = "No hay horarios disponibles para la doctor Abraham Aracena en este momento.";
             }
 
             context = "Horarios disponibles";
