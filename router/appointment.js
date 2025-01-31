@@ -143,12 +143,12 @@ const addAppointment = async (req, res) => {
         axios
           .post('https://bot-ga.medicloudsuite.com/v1/messages', {
             number: `18498171964`,
-            message: `LE NOTIFICAMOS QUE SE ACABA DE AGENDAR UNA NUEVA CITA \n\n- Paciente: ${patientName}`
+            message: `LE NOTIFICAMOS QUE SE ACABA DE AGENDAR UNA NUEVA CITA (Dra. Gianna Castillo) \n\n- Paciente: ${patientName}`
           })
           .then(() => {
             axios
               .post('https://bot-ga.medicloudsuite.com/v1/messages', {
-                number: `18498171964`,
+                number: `18498818111`,
                 message: `LE NOTIFICAMOS QUE SE ACABA DE AGENDAR UNA NUEVA CITA \n\n- Paciente: ${patientName}`
               })
               .then(() => {
