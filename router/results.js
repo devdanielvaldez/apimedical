@@ -31,7 +31,7 @@ const createResult = async (req, res) => {
 
 
         axios
-          .post('https://bot.drjenniferreyes.com/v1/messages', {
+          .post('https://bot-ga.medicloudsuite.com/v1/messages', {
             number: `1${patient.whatsAppNumber}`,
             message: `A CONTINUACIÓN LE PRESENTAMOS SUS RESULTADOS:\n\n- Nombre del Resultado: ${testName}\n- Descripción: ${description}\n- Enlace del Resultado: ${result}`
           })
